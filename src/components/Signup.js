@@ -27,7 +27,11 @@ const Signup = () => {
               <div className="sigup-title">
                 <h2>Sign Up</h2>
                 <Stepper
-                  style={{ width: "18%" }}
+                  style={{
+                    width: "90%",
+                    margin: "15px",
+                    marginBottom: "20px",
+                  }}
                   activeStep={currentStep - 1}
                   orientation="horizontal"
                 >
@@ -43,11 +47,7 @@ const Signup = () => {
                 </Stepper>
                 <p>Create an account to use this platform</p>
               </div>
-              <div className="page">
-                {showStep(currentStep)};{/* <Signupfirststep /> */}
-                {/* <Signupsecondstep /> */}
-                {/* <Signupthird /> */}
-              </div>
+              <div className="page">{showStep(currentStep)}</div>
             </div>
           </form>
         </div>

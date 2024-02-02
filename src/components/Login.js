@@ -17,10 +17,11 @@ const Login = () => {
           <form class="login-form">
             <input type="text" placeholder="username" />
             <input type="password" placeholder="password" />
-            <button>login</button>
+            <button type="button">login</button>
             <p class="message">
               Not registered?{" "}
               <button
+                type="button"
                 className="login-signup"
                 onClick={() => navigate("/signup")}
               >

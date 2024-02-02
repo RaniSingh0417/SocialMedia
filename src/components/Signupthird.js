@@ -1,25 +1,69 @@
 import React, { useContext } from "react";
 import { multiStepContext } from "../StepContext";
+import { useNavigate } from "react-router-dom";
 const Signupthird = () => {
-  const { setStep } = useContext(multiStepContext);
+  const navigate = useNavigate();
+  const {
+    setStep,
+    contactnumber,
+    setContactnumber,
+    gender,
+    setGender,
+    isUnder18,
+    setisUnder18,
+    email,
+    password,
+
+    username,
+
+    dob,
+  } = useContext(multiStepContext);
   return (
     <div>
       <div className="input-signup-box">
         {" "}
-        <input type="text" maxLength="10" required autoFocus />
-        <label for="text">Contact</label>
+        <input
+          type="text"
+          maxLength="10"
+          value={contactnumber}
+          onChange={(e) => setContactnumber(e.target.value)}
+          required
+          autoFocus
+        />
+        <label for="text">Contact Number</label>
       </div>
       <div className="signup-gender">
         <label className="gender-label">Gender :</label>
         <br />
-        <input type="radio" value="Male" name="gender" /> Male
-        <input type="radio" value="Female" name="gender" /> Female
-        <input type="radio" value="Other" name="gender" /> Other
+        <input
+          type="radio"
+          value={gender}
+          onChange={() => setGender("Male")}
+        />{" "}
+        Male
+        <input
+          type="radio"
+          value={gender}
+          name="gender"
+          onChange={() => setGender("Female")}
+        />{" "}
+        Female
+        <input
+          type="radio"
+          value={gender}
+          name="gender"
+          onChange={() => setGender("Other")}
+        />{" "}
+        Other
       </div>
 
       <div className="signup-checkbox">
         <label>Are you under 18 ?</label>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          value={isUnder18}
+          onChange={() => setisUnder18(true)}
+        />
       </div>
 
       <div className="btn-box">
@@ -28,7 +72,11 @@ const Signupthird = () => {
             Back
           </button>
         </span>
-        <button type="button" className="btn-next">
+        <button
+          type="button"
+          className="btn-next"
+          onClick={() => navigate("/login")}
+        >
           Sign Up
         </button>
       </div>
