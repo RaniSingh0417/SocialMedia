@@ -9,7 +9,7 @@ const StepContext = () => {
   const [password, setPassword] = useState("");
   const [username, setusername] = useState("");
   const [dob, setDOB] = useState("");
-  const [contactnumber, setContactnumber] = useState(null);
+  const [number, setnumber] = useState("");
   const [gender, setGender] = useState(null);
   const [isUnder18, setisUnder18] = useState(false);
 
@@ -27,8 +27,8 @@ const StepContext = () => {
           setusername,
           dob,
           setDOB,
-          contactnumber,
-          setContactnumber,
+          number,
+          setnumber,
           gender,
           setGender,
           isUnder18,

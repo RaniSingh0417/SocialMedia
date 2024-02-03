@@ -1,12 +1,16 @@
+import axios from "axios";
 import React, { useContext } from "react";
 import { multiStepContext } from "../StepContext";
 import { useNavigate } from "react-router-dom";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Signupthird = () => {
   const navigate = useNavigate();
   const {
     setStep,
-    contactnumber,
-    setContactnumber,
+    number,
+    setnumber,
     gender,
     setGender,
     isUnder18,
@@ -18,15 +22,65 @@ const Signupthird = () => {
 
     dob,
   } = useContext(multiStepContext);
+
+  // Signup Function
+
+  const handleSignup = async () => {
+    try {
+      console.log(email);
+      console.log(password);
+      console.log(dob);
+      console.log(username);
+      console.log(gender);
+      console.log(number);
+      if (number.trim() === "") {
+        return toast.warning("Please enter your number");
+      }
+      // const formData = new FormData();
+      // formData.append("email", email);
+      // formData.append("password", password);
+      // formData.append("username", username);
+      // formData.append("dob", dob);
+      // formData.append(" mobileno", number);
+      // formData.append("isUnder18", isUnder18);
+
+      const response = await axios.post("/signup", {
+        email: email,
+        password: password,
+        username: username,
+        dob: dob,
+        mobileno: number,
+        gender: gender,
+        isUnder18: isUnder18,
+      });
+      console.log(response);
+      // "Thank You for signing Up"
+      if (response.data.success) {
+        toast.success(response.data.message);
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+      if (
+        error &&
+        error.response &&
+        error.response.data &&
+        error.response.data.error
+      ) {
+        toast.error(error.response.data.error);
+      }
+    }
+  };
   return (
     <div>
+      <ToastContainer />
       <div className="input-signup-box">
         {" "}
         <input
-          type="text"
+          type="number"
           maxLength="10"
-          value={contactnumber}
-          onChange={(e) => setContactnumber(e.target.value)}
+          value={number}
+          onChange={(e) => setnumber(e.target.value)}
           required
           autoFocus
         />
@@ -62,7 +116,7 @@ const Signupthird = () => {
         <input
           type="checkbox"
           value={isUnder18}
-          onChange={() => setisUnder18(true)}
+          onChange={(e) => setisUnder18(e.target.checked)}
         />
       </div>
 
@@ -75,7 +129,7 @@ const Signupthird = () => {
         <button
           type="button"
           className="btn-next"
-          onClick={() => navigate("/login")}
+          onClick={() => handleSignup()}
         >
           Sign Up
         </button>
