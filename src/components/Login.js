@@ -1,10 +1,43 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      if (email.trim() === "") return toast.warning("Please enter your email");
+      if (password.trim() === "")
+        return toast.warning("Please enter your password");
+
+      const response = await axios.post("/login", {
+        email: email,
+        password: password,
+      });
+      if (response.data.success) {
+        toast.success("Welcome !");
+        navigate("/profile");
+      }
+    } catch (error) {
+      console.log(error);
+      if (
+        error &&
+        error.response &&
+        error.response.data &&
+        error.response.data.error
+      ) {
+        toast.error(error.response.data.error);
+      }
+    }
+  };
   return (
     <>
+      <ToastContainer />
       <div className="main-login">
         <div className="login-page">
           <div className="form">
@@ -16,9 +49,23 @@ const Login = () => {
               </div>
             </div>
             <form className="login-form">
-              <input type="text" placeholder="username" />
-              <input type="password" placeholder="password" />
-              <button type="button">login</button>
+              <input
+                type="text"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                placeholder="Email"
+              />
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="password"
+              />
+              <button type="button" onClick={() => handleLogin()}>
+                login
+              </button>
               <p class="message">
                 Not registered?{" "}
                 <button
