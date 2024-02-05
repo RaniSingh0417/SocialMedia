@@ -2,17 +2,17 @@ import axios from "axios";
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [userdata, setuserdata] = useState();
-  useEffect(() => {
-    getuserData();
-  }, []);
+  const [userdata, setuserdata] = useState({});
+
   const getuserData = async () => {
     try {
       const response = await axios.get("/currentuser");
+      console.log(response);
       if (response.data.success) {
         console.log(response.data.data);
         setuserdata(response.data.data);
@@ -52,23 +52,30 @@ const Profile = () => {
       }
     }
   };
-  return (
-    <>
-      <div className="mainbody">
-        <h1>Hello {userdata.username}, Welcome Back!</h1>
-        <p>
-          Age :{new Date().getFullYear() - new Date(userdata.dob).getFullYear()}{" "}
-          years
-        </p>
-        <p>email : {userdata.email}</p>
-        <p>Under 18? : {userdata.isUnder18 ? "Yes" : "No"}</p>
-        <p>Phone number : {userdata.mobileno} </p>
-        <button type="button" onClick={() => handleLogout()}>
-          Logout
-        </button>
-      </div>
-    </>
-  );
+
+  useEffect(() => {
+    getuserData();
+  }, []);
+  if (userdata)
+    return (
+      <>
+        <ToastContainer />
+        <div className="mainbody">
+          <h1>Hello {userdata.username}, Welcome Back!</h1>
+          <p>
+            Age :
+            {new Date().getFullYear() - new Date(userdata.dob).getFullYear()}{" "}
+            years
+          </p>
+          <p>email : {userdata.email}</p>
+          <p>Under 18? : {userdata.isUnder18 ? "Yes" : "No"}</p>
+          <p>Phone number : {userdata.mobileno} </p>
+          <button type="button" onClick={() => handleLogout()}>
+            Logout
+          </button>
+        </div>
+      </>
+    );
 };
 
 export default Profile;

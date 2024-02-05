@@ -20,8 +20,11 @@ const Login = () => {
         password: password,
       });
       if (response.data.success) {
-        toast.success("Welcome !");
+      
+        toast.success(response.data.message);
         navigate("/profile");
+        
+       
       }
     } catch (error) {
       console.log(error);
@@ -31,7 +34,7 @@ const Login = () => {
         error.response.data &&
         error.response.data.error
       ) {
-        toast.error(error.response.data.error);
+       return  toast.error(error.response.data.error);
       }
     }
   };

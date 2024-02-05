@@ -8,6 +8,7 @@ import Error from "./components/Error";
 // import StepContext from "./StepContext";
 import Mainsignup from "./components/Mainsignup";
 import Profile from "./components/Profile";
+import Login1 from "./components/Profile1";
 function App() {
   return (
     <>
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Mainsignup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/login1" element={<Login1 />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<Error />} />
         </Routes>
