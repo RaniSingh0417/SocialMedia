@@ -31,12 +31,14 @@ const Profile1 = () => {
               </button>
             </form>
             <div className="social-login">
-              <h3>log in via</h3>
-              <div className="social-icons">
-                <a href="#" className="social-login__icon fab fa-instagram"></a>
-                <a href="#" className="social-login__icon fab fa-facebook"></a>
-                <a href="#" className="social-login__icon fab fa-twitter"></a>
-              </div>
+              <h3>Don't have an account ?</h3>
+              <button
+                type="button"
+                className="login-signup-btn"
+                onClick={() => navigate("/signup")}
+              >
+                Create
+              </button>
             </div>
           </div>
           <div class="screen__background">

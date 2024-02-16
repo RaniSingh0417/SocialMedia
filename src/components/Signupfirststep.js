@@ -48,7 +48,7 @@ const Signupfirststep = () => {
           <button
             type="button"
             className="login-btn"
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/login1")}
           >
             Login
           </button>

@@ -9,10 +9,12 @@ import Error from "./components/Error";
 import Mainsignup from "./components/Mainsignup";
 import Profile from "./components/Profile";
 import Login1 from "./components/Profile1";
+import Navbar from "./components/Navbar";
 function App() {
   return (
     <>
       <Router>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Mainsignup />} />

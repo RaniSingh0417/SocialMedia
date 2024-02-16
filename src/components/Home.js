@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div className="home-page">
       <div className="home-container">
-        <p>Welcome to famebook !</p>
+        <p>Welcome to Cre8ify !</p>
       </div>
       <div className="home-content">
         <h3>For best user experience signup here</h3>{" "}
